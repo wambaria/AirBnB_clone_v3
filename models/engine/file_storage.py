@@ -39,13 +39,13 @@ class FileStorage:
 
         new_dict = self.all(cls)
         for obj in new_dict.values():
-            if obj.id == id: 
-                return obj 
+            if obj.id == id:
+                return obj
         return None
 
     def count(self, cls=None):
         """ A function to count the number of objects in a database """
-     
+
         new_dict = self.all(cls)
         return (len(new_dict))
 

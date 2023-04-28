@@ -62,7 +62,7 @@ class DBStorage:
 
     def count(self, cls=None):
         """ A function to count the number of objects in a database """
-        
+
         new_dict = self.all(cls)
         return (len(new_dict))
 
