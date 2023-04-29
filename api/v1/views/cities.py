@@ -27,13 +27,13 @@ def cities_by_state(state_id):
     elif request.method == 'POST':
         for state in states:
             if state.id == state_id:
-                new_dict = request.get_json()
-                if new_dict is None:
+                my_dict = request.get_json()
+                if my_dict is None:
                     abort(400, 'Not a JSON')
-                if new_dict.get("name") is None:
+                if my_dict.get("name") is None:
                     abort(400, 'Missing name')
-                new_dict["state_id"] = state_id
-                city = City(**new_dict)
+                my_dict["state_id"] = state_id
+                city = City(**my_dict)
                 city.save()
                 return jsonify(city.to_dict()), 201
 
@@ -52,9 +52,9 @@ def city_by_city_id(city_id):
         storage.save()
         return jsonify({}), 200
     elif request.method == 'PUT':
-        new_dict = request.get_json()
+        my_dict = request.get_json()
         if my_dict is None:
             abort(400, 'Not a JSON')
-        city.name = new_dict.get("name")
+        city.name = my_dict.get("name")
         city.save()
         return jsonify(city.to_dict()), 200
