@@ -22,15 +22,15 @@ def users(user_id=None):
         if request.method == 'GET':
             return jsonify(users)
         elif request.method == 'POST':
-            new_dict = request.get_json()
+            my_dict = request.get_json()
 
-            if new_dict is None:
+            if my_dict is None:
                 abort(400, 'Not a JSON')
-            if new_dict.get("email") is None:
+            if my_dict.get("email") is None:
                 abort(400, 'Missing email')
-            if new_dict.get("password") is None:
+            if my_dict.get("password") is None:
                 abort(400, 'Missing password')
-            new_user = User(**new_dict)
+            new_user = User(**my_dict)
             new_user.save()
             return jsonify(new_user.to_dict()), 201
     else:
@@ -40,13 +40,13 @@ def users(user_id=None):
                     return jsonify(user)
             abort(404)
         elif request.method == 'PUT':
-            new_dict = request.get_json()
+            my_dict = request.get_json()
 
-            if new_dict is None:
+            if my_dict is None:
                 abort(400, 'Not a JSON')
             for user in users_objs.values():
                 if user.id == user_id:
-                    user.name = new_dict.get("name")
+                    user.name = my_dict.get("name")
                     user.save()
                     return jsonify(user.to_dict()), 200
             abort(404)
@@ -57,4 +57,4 @@ def users(user_id=None):
                     storage.delete(obj)
                     storage.save()
                     return jsonify({}), 200
-            abort(404)i
+            abort(404)
